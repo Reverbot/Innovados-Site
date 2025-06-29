@@ -1,0 +1,17 @@
+---
+import { getText } from "../../utils/texts";
+const { lang = 'es' } = Astro.props;
+const t = getText('hero', lang);
+const prefix = lang === 'en' ? '/en' : '';
+---
+
+<section class="section hero" style="text-align:left;background:url('/INNOVADOS_WEB_Digital_Marketing_Background_Desktop.png') center/cover no-repeat;border-radius:25px;overflow:hidden;width:min(calc(100% - 50px),1300px);margin:0 auto;">
+  <div class="container">
+    <h1 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;text-transform:uppercase;">{t.title}</h1>
+    <p style="margin-bottom:2rem;">{t.subtitle}</p>
+    <div class="hero-actions" style="display:flex;justify-content:left;gap:1.5rem;flex-wrap:wrap;">
+      <a href="#about" class="btn-secondary">{t.secondaryCta}</a>
+      <a href={`${prefix}${lang === 'en' ? '/contact' : '/contacto'}`} class="btn-primary">{t.primaryCta}</a>
+    </div>
+  </div>
+</section>

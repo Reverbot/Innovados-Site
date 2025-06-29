@@ -1,0 +1,41 @@
+---
+import { getText } from "../../utils/texts";
+const { lang = 'es' } = Astro.props;
+const t = getText('testimonials', lang);
+
+// Define default items if t.items is undefined
+const items = t.items || [];
+---
+
+<section id="testimonios" class="section testimonials" style="background:url('/INNOVADOS_WEB_Background_celeste.png') right/55% 100% no-repeat; margin: 4rem 0;">
+  <div class="container" style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;">
+    <div style="flex:1 1 260px;max-width:320px;">
+      <img src="/INNOVADOS_WEB_quote_icon.png" alt="Icono de comillas" style="width:96px;height:96px;margin-bottom:1rem;" />
+      <h2 style="text-transform:uppercase;margin-bottom:1.5rem;max-width:15ch;">{t.title}</h2>
+      <div style="display:flex;gap:.5rem;align-items:center;">
+        <span style="display:inline-block;width:40px;height:8px;border-radius:4px;background:var(--clr-primary);"></span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#111;"></span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#111;"></span>
+      </div>
+    </div>
+    <div style="flex:1 1 500px;position:relative;">
+      <div style="padding:3rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;">
+        {items.length > 0 ? (
+          items.map((item: { text: string; author: string; stars: number }, idx: number) => (
+            <div style="background:#fff;border-radius:12px;padding:1rem 1.25rem;box-shadow:0 2px 6px rgba(0,0,0,.08);">
+              <p style="margin-bottom:1rem;font-size:.95rem;">{item.text}</p>
+              <strong style="display:block;margin-bottom:.5rem;">{item.author}</strong>
+              <span aria-label={`${item.stars} ${lang === 'es' ? 'estrellas' : 'stars'}`} style="color:#f7c948;">
+                {'★'.repeat(item.stars || 5)}
+              </span>
+            </div>
+          ))
+        ) : (
+          <p style="grid-column:1/-1;text-align:center;padding:2rem;">
+            {lang === 'es' ? 'No hay testimonios disponibles en este momento.' : 'No testimonials available at the moment.'}
+          </p>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

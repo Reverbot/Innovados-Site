@@ -1,0 +1,23 @@
+---
+import { getText } from "../../utils/texts";
+import GalleryModal from "../common/GalleryModal.astro";
+
+const { lang = 'es' } = Astro.props;
+const t = getText('portfolio', lang);
+
+const items = [
+  { thumb: "/INNOVADOS_WEB_Portfolio_CheGrill.png", detail: "/INNOVADOS_WEB_Portfolio_CheGrill_summary.png", alt: "Che Grill" },
+  { thumb: "/INNOVADOS_WEB_Portfolio_Mayim.png", detail: "/INNOVADOS_WEB_Portfolio_Mayim_summary.png", alt: "Mayim" },
+  { thumb: "/INNOVADOS_WEB_Portfolio_Satoris.png", detail: "/INNOVADOS_WEB_Portfolio_Satoris_summary.png", alt: "Satoris" },
+  { thumb: "/INNOVADOS_WEB_Portfolio_MoneyStacks.png", detail: "/INNOVADOS_WEB_Portfolio_MoneyStacks_summary.png", alt: "MoneyStacks" }
+];
+---
+
+<section id="portfolio" class="section portfolio">
+  <h2 style="text-align:center;margin-bottom:2rem;text-transform:uppercase;">{t.title}</h2>
+  <GalleryModal items={items} />
+  
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="#" class="btn-primary">{t.cta}</a>
+  </div>
+</section>

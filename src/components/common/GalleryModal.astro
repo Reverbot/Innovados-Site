@@ -1,0 +1,44 @@
+---
+const { items } = Astro.props;
+---
+
+<div class="portfolio-grid container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;justify-items:center;">
+  {items.map(item => (
+    <img class="gallery-thumb" src={item.thumb} alt={item.alt} data-detail={item.detail} style="width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:12px;cursor:pointer;" />
+  ))}
+</div>
+
+<!-- Overlay / Modal -->
+<div id="gallery-modal" class="modal-overlay" hidden>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Cerrar">&times;</button>
+    <img id="gallery-modal-img" src="" alt="Detalle" />
+  </div>
+</div>
+
+<script>// @ts-nocheck
+  const thumbs = document.querySelectorAll('img.gallery-thumb');
+  const modal = document.getElementById('gallery-modal');
+  const modalImg = document.getElementById('gallery-modal-img');
+  const closeModal = () => {
+    if (!modal) return;  
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  };
+  thumbs.forEach(el => {
+    el.addEventListener('click', () => {
+      if (!modal || !modalImg) return;
+      modalImg.src = el.dataset.detail || el.src;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t === modal || t.closest && t.closest('.modal-close')) {
+        closeModal();
+      }
+    });
+  }
+</script>

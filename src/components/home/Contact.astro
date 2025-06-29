@@ -1,0 +1,491 @@
+---
+// @ts-nocheck - Temporary until we resolve all type issues
+import { getText } from "../../utils/texts";
+
+// Import the React component with client:load directive
+import PhoneInput from "../ui/PhoneInput";
+
+// Import React to the component scope
+import React from 'react';
+
+interface ContactProps {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props as ContactProps;
+const t = getText('contact', lang);
+
+// Ensure form fields have default values if not found in translations
+const form = t?.form || {
+  name: 'Name',
+  lastname: 'Last Name',
+  email: 'Email',
+  phone: 'Phone',
+  message: 'Tell us about your project',
+  submit: 'Submit'
+};
+
+// Client-side script for form handling
+const clientScript = `
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    
+    const errorElement = form.querySelector('.phone-error');
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const phoneInput = document.getElementById('phone-input');
+      
+      // Basic validation
+      if (!phoneInput || !phoneInput.value) {
+        if (errorElement) {
+          errorElement.textContent = '${lang === 'es' ? 'Por favor ingresa un número de teléfono válido' : 'Please enter a valid phone number'}';
+        }
+        return;
+      }
+      
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.getAttribute('action') || window.location.href, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          alert('${lang === 'es' ? 'Mensaje enviado' : 'Message sent'}');
+          form.reset();
+          // Reset phone input
+          const phoneComponent = document.querySelector('input[type="tel"]');
+          if (phoneComponent) phoneComponent.value = '';
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('${lang === 'es' ? 'Error al enviar el mensaje' : 'Error sending message'}');
+      }
+    });
+  });
+`;
+---
+
+<style>
+  /* Form Layout */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+  
+  /* Name Group - Horizontal Layout */
+  .name-group {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .name-field,
+  .lastname-field {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Form Groups */
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .form-group.full-width {
+    width: 100%;
+  }
+  
+  @media (max-width: 640px) {
+    .name-group {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .name-field,
+    .lastname-field {
+      width: 100%;
+    }
+  }
+  
+  /* Form Controls */
+  input,
+  textarea,
+  select,
+  button {
+    width: 100%;
+    padding: 0.8rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+  }
+  
+  /* Placeholder Styles */
+  ::placeholder {
+    color: white;
+    opacity: 1;
+  }
+  
+  /* Specific placeholder for better browser compatibility */
+  input::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    color: white;
+    opacity: 1;
+  }
+  
+  /* Focus States */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Textarea Specific */
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  
+  /* Submit Button */
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    background: var(--clr-secondary);
+    color: var(--clr-light);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    width: auto;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  button[type="submit"]:hover {
+    background: var(--clr-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Error Messages */
+  .error-message {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    min-height: 1.2rem;
+    grid-column: 1 / -1;
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    form {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .form-group {
+      grid-column: 1 / -1 !important;
+    }
+  }
+</style>
+
+<section id="contacto" class="section contact" style="background:var(--clr-primary);color:var(--clr-light);">
+  <div class="container" style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;">
+    <div style="flex:1 1 300px;max-width:360px;">
+      <img src="/INNOVADOS_WEB_Contact_Image.png" alt="Ilustración contacto" style="width:100%;border-radius:20px;object-fit:contain;" />
+    </div>
+    <div style="flex:1 1 400px;min-width:260px;">
+      <h2 style="text-transform:uppercase;margin-bottom:1.5rem;">{t.title}</h2>
+      <form 
+        id="contact-form"
+        class="contact-form"
+        method="POST"
+        action="/api/contact"
+      >
+        <div class="form-group name-group full-width  ">
+          <div class="form-group name-field">
+            <input 
+              type="text" 
+              name="name"
+              placeholder={form.name}
+              required
+              aria-label={form.name}
+            />
+          </div>
+          
+          <div class="form-group lastname-field">
+            <input 
+              type="text" 
+              name="lastname"
+              placeholder={form.lastname || 'Lastname'}
+              aria-label={form.lastname || 'Lastname'}
+            />
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <input 
+            type="email" 
+            name="email"
+            placeholder={form.email || 'Email'}
+            required
+            aria-label={form.email || 'Email'}
+          />
+        </div>
+        
+        <!-- Phone Input -->
+        <div class="form-group full-width">
+          <PhoneInput 
+            client:load
+            value=""
+            onChange={function(value: string) {
+              const input = document.getElementById('phone-input');
+              if (input instanceof HTMLInputElement) {
+                input.value = value || '';
+              }
+            }}
+            placeholder={form.phone || 'Phone'}
+            defaultCountry="US"
+            international
+            withCountryCallingCode
+            className="phone-input"
+            style={{
+              '--PhoneInputCountrySelectArrow-color': '#fff',
+              '--PhoneInput-color': '#fff',
+              '--PhoneInputCountrySelectArrow-opacity': '0.8',
+            }}
+            inputStyle={{
+              background: 'transparent',
+              color: '#fff',
+              border: 'none',
+              outline: 'none',
+             
+              fontSize: '1rem',
+              padding: '0.8rem 1.25rem',
+              '::placeholder': {
+                color: 'rgba(255,255,255,0.7)'
+              }
+            }}
+          />
+          <input type="hidden" name="phone" id="phone-input" required />
+          <div class="error-message phone-error"></div>
+        </div>
+        
+        <div class="form-group full-width">
+          <textarea 
+            name="message" 
+            placeholder={form.message || 'Message'}
+            required
+            aria-label={form.message || 'Message'}
+          ></textarea>
+        </div>
+        
+        <div class="form-group full-width" style="margin-top: 0.5rem;">
+          <button type="submit">
+            {form.submit || 'Submit'}
+          </button>
+        </div>
+      </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // Type definitions for form data and errors
+          interface FormData {
+            name: string;
+            lastname: string;
+            email: string;
+            phone: string;
+            message: string;
+          }
+          
+          interface FormErrors {
+            name?: string;
+            email?: string;
+            phone?: string;
+            [key: string]: string | undefined;
+          }
+          
+          const form = document.getElementById('contact-form') as HTMLFormElement | null;
+          const errorElement = document.getElementById('form-error');
+          const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+          
+          if (!form || !submitButton) return;
+          
+          // Initialize form data state
+          const formData: FormData = {
+            name: '',
+            lastname: '',
+            email: '',
+            phone: '',
+            message: ''
+          };
+          
+          // Form errors state
+          const formErrors: FormErrors = {};
+          
+          // Translation helper (simplified)
+          const t = (key: string) => {
+            const translations: Record<string, string> = {
+              'contact.formErrors.nameRequired': 'Por favor ingresa tu nombre',
+              'contact.formErrors.emailRequired': 'Por favor ingresa tu correo electrónico',
+              'contact.formErrors.emailInvalid': 'Por favor ingresa un correo electrónico válido',
+              'contact.formErrors.phoneRequired': 'Por favor ingresa tu número de teléfono',
+              'contact.formSuccess': '¡Mensaje enviado con éxito!',
+              'contact.formError': 'Error al enviar el mensaje'
+            };
+            return translations[key] || key;
+          };
+          
+          // Update form data when inputs change
+          form.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', (e) => {
+              const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+              const name = target.name as keyof FormData;
+              if (name in formData) {
+                formData[name] = target.value;
+              }
+            });
+          });
+          
+          // Handle phone input separately since it's a React component
+          const phoneInputField = document.querySelector('input[type="tel"]');
+          if (phoneInputField) {
+            phoneInputField.addEventListener('input', (e) => {
+              formData.phone = (e.target as HTMLInputElement).value;
+            });
+          }
+          
+          // Update UI to show errors
+          const updateErrorUI = (errors: FormErrors) => {
+            // Clear all error messages first
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            
+            // Set new error messages
+            Object.entries(errors).forEach(([field, message]) => {
+              const errorElement = document.querySelector(`.error-${field}`);
+              if (errorElement && message !== undefined) {
+                errorElement.textContent = message;
+              }
+            });
+          };
+          
+          // Form submission handler
+          const handleSubmit = async (e: Event) => {
+            e.preventDefault();
+            if (!submitButton) return;
+            
+            // Disable submit button during submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            
+            // Clear previous errors
+            const errors: FormErrors = {};
+            
+            // Validate form
+            if (!formData.name.trim()) {
+              errors.name = t('contact.formErrors.nameRequired');
+            }
+            
+            if (!formData.email.trim()) {
+              errors.email = t('contact.formErrors.emailRequired');
+            } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+              errors.email = t('contact.formErrors.emailInvalid');
+            }
+            
+            if (!formData.phone.trim()) {
+              errors.phone = t('contact.formErrors.phoneRequired');
+            }
+            
+            // Show errors if any
+            if (Object.keys(errors).length > 0) {
+              updateErrorUI(errors);
+              submitButton.disabled = false;
+              submitButton.textContent = 'Enviar mensaje';
+              return;
+            }
+            
+            try {
+              // Submit form data to API
+              const response = await fetch('/api/contact.json', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+                credentials: 'same-origin' // Ensure cookies are sent with the request
+              });
+              
+              const result = await response.json();
+              
+              if (!response.ok) {
+                throw new Error(result.message || 'Error al enviar el formulario');
+              }
+              
+              // Show success message
+              alert(t('contact.formSuccess'));
+              
+              // Reset form
+              form.reset();
+              
+              // Reset form data
+              Object.keys(formData).forEach(key => {
+                formData[key as keyof FormData] = '';
+              });
+              
+              // Reset phone input if it's a React component
+              const phoneInput = document.querySelector('input[type="tel"]') as HTMLInputElement;
+              if (phoneInput) {
+                phoneInput.value = '';
+              }
+            } catch (error) {
+              console.error('Error submitting form:', error);
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              alert(`${t('contact.formError')}: ${errorMessage}`);
+            } finally {
+              // Re-enable submit button
+              if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar mensaje';
+              }
+            }
+          }
+          form.addEventListener('submit', handleSubmit);
+        });
+      </script>
+    </div>
+  </div>
+</section>

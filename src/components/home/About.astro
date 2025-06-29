@@ -1,0 +1,19 @@
+---
+import { getText } from "../../utils/texts";
+const { lang = 'es' } = Astro.props;
+const t = getText('about', lang);
+const prefix = lang === 'en' ? '/en' : '';
+---
+
+<section id="about" class="section about">
+  <div class="section-divider" aria-hidden="true"></div>
+  <div class="container" style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;">
+    <img src="/INNOVADOS_WEB_Digital_Marketing_picture_somos.png" alt="Equipo Innovados" style="flex:1 1 320px;border-radius:20px;width:100%;max-width:420px;" />
+    <div style="flex:1 1 300px;">
+      <h2 style="text-align:left;margin-bottom:1rem;text-transform:uppercase;">{t.title}</h2>
+      <p style="margin-bottom:1rem;">{t.p1}</p>
+      <p style="font-weight:700;margin-bottom:1.5rem;">{t.p2}</p>
+      <a href={`${prefix}${lang==='en'? '/contact' : '/contacto'}`} class="btn-primary">{t.cta}</a>
+    </div>
+  </div>
+</section>

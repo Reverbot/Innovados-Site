@@ -1,0 +1,33 @@
+---
+import { getText } from "../../utils/texts";
+const { lang = 'es' } = Astro.props;
+const t = getText('services', lang);
+
+// Define default cards if t.cards is undefined
+const cards = t.cards || [];
+---
+
+<section id="services" class="section services" style="background:#f9fafb;">
+  <h2 style="text-align:center;margin-bottom:.5rem;text-transform:uppercase;">{t.title}</h2>
+  <p style="text-align:center;margin-bottom:2.5rem;font-weight:600;">{t.subtitle}</p>
+  <div class="services-grid container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;justify-items:center;max-width:900px;">
+    {cards.length > 0 ? (
+      cards.map((card: string, i: number) => (
+        <div class="service-card" style="text-align:center;">
+          <img 
+            src={`/INNOVADOS_WEB_Digital_Marketing_Servicio_${i===0?'Diseño':i===1?'Web_Design':i===2?'Email_Marketing':'Ads'}.png`} 
+            alt={card} 
+            style="width:120px;height:120px;object-fit:contain;border-radius:12px;box-shadow:0 0 0 2px rgba(0,0,0,.05);background:#fff;" 
+            loading="lazy"
+          />
+          <p style="margin-top:1rem;font-weight:700;text-transform:uppercase;">{card}</p>
+        </div>
+      ))
+    ) : (
+      <p>No services available at the moment.</p>
+    )}
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="#" class="btn-primary">Quiero saber más</a>
+  </div>
+</section>

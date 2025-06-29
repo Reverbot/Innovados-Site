@@ -1,0 +1,29 @@
+---
+import Base from "../layouts/Base.astro";
+const lang = "es";
+---
+
+<Base lang={lang} title="Contacto | Innovados">
+  <h1>Contacto</h1>
+  <p style="max-width:60ch;margin-bottom:1rem;">¿Listo para impulsar tu proyecto? Completa el formulario o envíanos un correo directo.</p>
+  <form action="mailto:info@innovados.com" method="post" enctype="text/plain" style="display:grid;gap:1rem;max-width:500px;margin-inline:auto;">
+    <label>
+      Nombre:
+      <input type="text" name="Nombre" required style="width:100%;padding:.5rem;" />
+    </label>
+    <label>
+      Email:
+      <input type="email" name="Email" required style="width:100%;padding:.5rem;" />
+    </label>
+    <label>
+      WhatsApp:
+      <input type="tel" name="WhatsApp" style="width:100%;padding:.5rem;" />
+    </label>
+    <label>
+      Mensaje:
+      <textarea name="Mensaje" rows="4" style="width:100%;padding:.5rem;"></textarea>
+    </label>
+    <button type="submit" class="cta" style="justify-self:start;">Enviar</button>
+  </form>
+  <p style="text-align:center;margin-top:2rem;">O escríbenos a <a href="mailto:info@innovados.com">info@innovados.com</a></p>
+</Base>

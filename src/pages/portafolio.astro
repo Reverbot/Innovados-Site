@@ -1,0 +1,29 @@
+---
+import Base from "../layouts/Base.astro";
+const lang = "es";
+---
+
+<Base lang={lang} title="Portafolio | Innovados">
+  <h1>Portafolio</h1>
+  <p style="max-width:60ch;">Algunos proyectos que demuestran nuestra capacidad para resolver problemas reales y generar resultados medibles.</p>
+  <div style="display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding-block:2rem;">
+    <article style="border:1px solid #e0e0e0;padding:1rem;border-radius:6px;">
+      <img src="/project1.webp" alt="Proyecto Ecommerce" style="width:100%;height:auto;border-radius:4px;margin-bottom:1rem;" />
+      <h3>E-commerce Fashion</h3>
+      <p>Rediseño completo de experiencia de compra, +45% conversión y Core Web Vitals en verde.</p>
+    </article>
+    <article style="border:1px solid #e0e0e0;padding:1rem;border-radius:6px;">
+      <img src="/project2.webp" alt="Landing SaaS" style="width:100%;height:auto;border-radius:4px;margin-bottom:1rem;" />
+      <h3>Landing SaaS B2B</h3>
+      <p>Copy, UX y embudos que generaron 300 leads calificados el primer mes.</p>
+    </article>
+    <article style="border:1px solid #e0e0e0;padding:1rem;border-radius:6px;">
+      <img src="/project3.webp" alt="Sitio ONG" style="width:100%;height:auto;border-radius:4px;margin-bottom:1rem;" />
+      <h3>Sitio ONG Educación</h3>
+      <p>Plataforma informativa optimizada para donaciones: +60% recaudación anual.</p>
+    </article>
+  </div>
+  <section style="text-align:center;padding:2rem 0;">
+    <a class="cta" href="/contacto">Solicitar presupuesto</a>
+  </section>
+</Base>

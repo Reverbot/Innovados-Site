@@ -1,0 +1,146 @@
+/// <reference types="astro/client" />
+/// <reference types="react" />
+/// <reference types="react-dom" />
+
+// Type definitions for react-phone-number-input
+declare module 'react-phone-number-input' {
+  import * as React from 'react';
+
+  export interface PhoneInputProps {
+    international?: boolean;
+    defaultCountry?: string;
+    value?: string;
+    onChange?: (value: string) => void;
+    placeholder?: string;
+    className?: string;
+    style?: React.CSSProperties;
+    disabled?: boolean;
+    error?: boolean;
+    country?: string;
+    countries?: string[];
+    labels?: Record<string, string>;
+    internationalIcon?: React.ReactNode;
+    addInternationalOption?: boolean;
+    displayInitialValueAsLocalNumber?: boolean;
+    limitMaxLength?: boolean;
+    countryOptionsOrder?: Array<string | { [key: string]: string }>;
+    countrySelectComponent?: React.ComponentType<{
+      value?: string;
+      onChange?: (value?: string) => void;
+      onFocus?: () => void;
+      onBlur?: () => void;
+      disabled?: boolean;
+      readOnly?: boolean;
+      tabIndex?: number | string;
+      className?: string;
+      name?: string;
+      required?: boolean;
+      options: Array<{ value?: string; label: string; icon: React.ReactNode }>;
+    }>;
+    inputComponent?: React.ComponentType<{
+      value?: string;
+      onChange?: (event: React.ChangeEvent<HTMLInputElement> | string) => void;
+      onFocus?: () => void;
+      onBlur?: () => void;
+      disabled?: boolean;
+      readOnly?: boolean;
+      tabIndex?: number | string;
+      className?: string;
+      name?: string;
+      required?: boolean;
+      autoFocus?: boolean;
+      autoComplete?: string;
+      placeholder?: string;
+      style?: React.CSSProperties;
+      type?: string;
+    }>;
+    numberInputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+    countrySelectProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
+    autoComplete?: string;
+    initialValueFormat?: 'national' | 'international';
+    countryCallingCodeEditable?: boolean;
+    smartCaret?: boolean;
+    showInternationalOption?: boolean;
+    countrySelectTabIndex?: number | string;
+    countrySelectComponent?: React.ComponentType<any>;
+    inputComponent?: React.ComponentType<any>;
+    containerComponent?: React.ComponentType<any>;
+    flagComponent?: React.ComponentType<{ country: string; countryName: string }>;
+    inputRef?: React.Ref<HTMLInputElement>;
+    onCountryChange?: (country?: string) => void;
+    onCountryFocus?: () => void;
+    onCountryBlur?: () => void;
+    onInputFocus?: () => void;
+    onInputBlur?: () => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    onEnterKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    onCountryDropdownToggle?: (isOpen: boolean) => void;
+    onCountryDropdownOpen?: () => void;
+    onCountryDropdownClose?: () => void;
+    onCountryDropdownFocus?: () => void;
+    onCountryDropdownBlur?: () => void;
+    onCountryDropdownKeyDown?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseDown?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseUp?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownClick?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOver?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOut?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseEnter?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseLeave?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownContextMenu?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownDoubleClick?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownWheel?: (event: React.WheelEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSelect?: (value: string, event: React.SyntheticEvent<HTMLSelectElement>) => void;
+    onCountryDropdownChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInput?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInvalid?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownReset?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSubmit?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyDownCapture?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyPress?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyUp?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyUpCapture?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownFocusCapture?: (event: React.FocusEvent<HTMLSelectElement>) => void;
+    onCountryDropdownBlurCapture?: (event: React.FocusEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseDownCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseUpCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownClickCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOverCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOutCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseEnterCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseLeaveCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownContextMenuCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownDoubleClickCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownWheelCapture?: (event: React.WheelEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSelectCapture?: (value: string, event: React.SyntheticEvent<HTMLSelectElement>) => void;
+    onCountryDropdownChangeCapture?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInputCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInvalidCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownResetCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSubmitCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyDownCaptureCapture?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyPressCapture?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownKeyUpCaptureCapture?: (event: React.KeyboardEvent<HTMLSelectElement>) => void;
+    onCountryDropdownFocusCaptureCapture?: (event: React.FocusEvent<HTMLSelectElement>) => void;
+    onCountryDropdownBlurCaptureCapture?: (event: React.FocusEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseDownCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseUpCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownClickCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOverCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseOutCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseEnterCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownMouseLeaveCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownContextMenuCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownDoubleClickCaptureCapture?: (event: React.MouseEvent<HTMLSelectElement>) => void;
+    onCountryDropdownWheelCaptureCapture?: (event: React.WheelEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSelectCaptureCapture?: (value: string, event: React.SyntheticEvent<HTMLSelectElement>) => void;
+    onCountryDropdownChangeCaptureCapture?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInputCaptureCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownInvalidCaptureCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownResetCaptureCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+    onCountryDropdownSubmitCaptureCapture?: (event: React.FormEvent<HTMLSelectElement>) => void;
+  }
+
+  const PhoneInput: React.FC<PhoneInputProps>;
+  export default PhoneInput;
+}

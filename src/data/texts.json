@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "es": {
+      "title": "¡Tu marca y tu producto tienen para brillar!",
+      "subtitle": "Solo necesitas las herramientas correctas y las manos expertas.",
+      "primaryCta": "Contáctanos",
+      "secondaryCta": "Comenzar"
+    },
+    "en": {
+      "title": "Your brand and product are ready to shine!",
+      "subtitle": "You just need the right tools and expert hands.",
+      "primaryCta": "Contact Us",
+      "secondaryCta": "Get Started"
+    }
+  },
+  "about": {
+    "es": {
+      "title": "Somos el equipo digital que no sabías que necesitabas",
+      "p1": "Somos una agencia 100% remota que mezcla creatividad con estructura: claridad, orden y resultados reales.",
+      "p2": "Creemos en tu ambición, y nuestro trabajo es convertirla en una realidad con estrategias que funcionan.",
+      "cta": "Contáctanos"
+    },
+    "en": {
+      "title": "About Us",
+      "p1": "We are a 100% remote agency blending creativity with structure: clarity, order and real results.",
+      "p2": "We believe in your ambition, and our job is to turn it into reality with strategies that work.",
+      "cta": "Let's Talk"
+    }
+  },
+  "services": {
+    "es": {
+      "title": "Lo que hacemos",
+      "subtitle": "(Para generar resultados de verdad)",
+      "cards": [
+        "Marcas que conectan",
+        "Webs que venden",
+        "Correos que captan",
+        "Ads que llegan"
+      ],
+      "cta": "Quiero saber más"
+    },
+    "en": {
+      "title": "What We Do",
+      "subtitle": "(To generate real results)",
+      "cards": [
+        "Brands that connect",
+        "Websites that sell",
+        "Emails that convert",
+        "Ads that reach"
+      ],
+      "cta": "Tell Me More"
+    }
+  },
+  "launch": {
+    "es": {
+      "title": "Tu producto merece un lanzamiento épico",
+      "subtitle": "Convertimos productos en fenómenos de venta online.",
+      "cta": "Comenzar"
+    },
+    "en": {
+      "title": "Your product deserves an epic launch",
+      "subtitle": "We turn products into online sales phenomena.",
+      "cta": "Get Started"
+    }
+  },
+  "portfolio": {
+    "es": {
+      "title": "Conoce algunos de nuestros proyectos",
+      "cta": "Ver todos"
+    },
+    "en": {
+      "title": "Check out some of our projects",
+      "cta": "View all"
+    }
+  },
+  "testimonials": {
+    "es": {
+      "title": "Lo que nuestros clientes dicen",
+      "items": [
+        {
+          "text": "Proceso excelente y mis ventas en web han subido.",
+          "author": "Conchita del Socorro",
+          "stars": 5
+        },
+        {
+          "text": "Proceso excelente y mis ventas en web han subido.",
+          "author": "Conchita del Socorro",
+          "stars": 5
+        }
+      ]
+    },
+    "en": {
+      "title": "What our clients say",
+      "items": [
+        {
+          "text": "Excellent process and my web sales have increased.",
+          "author": "Conchita del Socorro",
+          "stars": 5
+        },
+        {
+          "text": "Excellent process and my web sales have increased.",
+          "author": "Conchita del Socorro",
+          "stars": 5
+        }
+      ]
+    }
+  },
+  "contact": {
+    "es": {
+      "title": "Contáctanos",
+      "form": {
+        "name": "Nombre",
+        "lastname": "Apellido",
+        "email": "Correo",
+        "phone": "Teléfono",
+        "message": "Cuéntanos un poco",
+        "submit": "Comencemos este viaje"
+      }
+    },
+    "en": {
+      "title": "Contact Us",
+      "form": {
+        "name": "First Name",
+        "lastname": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Tell us a bit about your project",
+        "submit": "Let's Start This Journey"
+      }
+    }
+  }
+}

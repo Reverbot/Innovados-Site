@@ -1,0 +1,13 @@
+---
+import { getText } from "../../utils/texts";
+const { lang = 'es' } = Astro.props;
+const t = getText('launch', lang);
+---
+
+<section id="launch" class="section launch">
+  <div style="background:url('/INNOVADOS_WEB_Background_Lanzamiento_desktop.png') top/cover no-repeat;border-radius:25px;margin:0 auto;color:var(--clr-light);padding:3rem 2rem;overflow:hidden;display:flex;flex-direction:column;gap:1.5rem;max-width:1300px;">
+    <h2 style="text-transform:uppercase;max-width:20ch;">{t.title}</h2>
+    <p style="max-width:38ch;">{t.subtitle}</p>
+    <a href="#" class="btn-secondary" style="align-self:start;background:var(--clr-light);color:var(--clr-primary);border:0;">{t.cta}</a>
+  </div>
+</section>
