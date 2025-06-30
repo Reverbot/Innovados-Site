@@ -5,9 +5,69 @@ const t = getText('launch', lang);
 ---
 
 <section id="launch" class="section launch">
-  <div style="background:url('/INNOVADOS_WEB_Background_Lanzamiento_desktop.png') top/cover no-repeat;border-radius:25px;margin:0 25px auto;color:var(--clr-light);padding:3rem 2rem;overflow:hidden;display:flex;flex-direction:column;gap:1.5rem;max-width:1300px;">
-    <h2 style="text-transform:uppercase;max-width:20ch;">{t.title}</h2>
-    <p style="max-width:38ch;">{t.subtitle}</p>
-    <a href="#" class="btn-secondary" style="align-self:start;background:var(--clr-light);color:var(--clr-primary);border:0;">{t.cta}</a>
+  <div class="launch-container">
+    <div class="launch-content">
+      <h2 class="launch-title">{t.title}</h2>
+      <p class="launch-subtitle">{t.subtitle}</p>
+      <a href="#" class="btn-secondary launch-button">{t.cta}</a>
+    </div>
   </div>
 </section>
+
+<style>
+  .launch {
+    padding: 0 1.5rem;
+  }
+  
+  .launch-container {
+    background: url('/INNOVADOS_WEB_Background_Lanzamiento_desktop.png') top/cover no-repeat;
+    border-radius: 25px;
+    color: var(--clr-light);
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .launch-content {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  
+  .launch-title {
+    text-transform: uppercase;
+    max-width: 20ch;
+    margin: 0;
+  }
+  
+  .launch-subtitle {
+    max-width: 38ch;
+    margin: 0;
+  }
+  
+  .launch-button {
+    align-self: flex-start;
+    background: var(--clr-light);
+    color: var(--clr-primary);
+    border: 0;
+  }
+  
+  @media (min-width: 1024px) {
+    .launch-content {
+      padding: 4rem 3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .launch {
+      padding: 0 1rem;
+    }
+    
+    .launch-content {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

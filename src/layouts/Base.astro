@@ -1,11 +1,15 @@
 ---
 // Props: title (string), lang ("es" | "en")
 import "../styles/globals.css";
+import { getText } from '../utils/texts';
+import Footer from '../components/common/Footer.astro';
+
 const {
   title = "Innovados",
   lang = "es",
 } = Astro.props;
 const isEN = lang === "en";
+const t = getText('common', lang);
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -53,31 +57,6 @@ const isEN = lang === "en";
     <main>
       <slot />
     </main>
-    <footer style="background:var(--clr-dark);color:var(--clr-light);padding:3rem 0;">
-       <div class="container" style="display:flex;flex-wrap:wrap;gap:3rem;justify-content:center;align-items:flex-start;text-align:center;">
-         <div style="flex:1 1 200px;min-width:180px;">
-           <img src="/INNOVADOS_WEB_Logo_Digital_Marketing.png" alt="Innovados logo" style="height:40px;margin-bottom:1rem;" />
-           <p style="max-width:30ch;font-size:.9rem;line-height:1.5;">Impulsamos marcas con estrategias digitales que venden.</p>
-         </div>
-         <nav style="flex:1 1 150px;min-width:140px;">
-           <h3 style="margin-bottom:.75rem;font-size:1rem;">Menú</h3>
-           <ul style="list-style:none;padding:0;display:grid;gap:.4rem;font-size:.9rem;">
-             <li><a href={isEN ? "/en/" : "/"} style="color:inherit;text-decoration:none;">{isEN ? "Home" : "Inicio"}</a></li>
-             <li><a href={isEN ? "/en/services" : "/servicios"} style="color:inherit;text-decoration:none;">{isEN ? "Services" : "Servicios"}</a></li>
-             <li><a href={isEN ? "/en/portfolio" : "/portafolio"} style="color:inherit;text-decoration:none;">{isEN ? "Portfolio" : "Portafolio"}</a></li>
-             <li><a href={isEN ? "/en/blog" : "/blog"} style="color:inherit;text-decoration:none;">Blog</a></li>
-           </ul>
-         </nav>
-         <div style="flex:1 1 150px;min-width:140px;">
-           <h3 style="margin-bottom:.75rem;font-size:1rem;">Síguenos</h3>
-           <div style="display:flex;gap:.75rem;font-size:1.2rem;">
-             <a href="#" aria-label="Instagram" style="color:inherit;text-decoration:none;">IG</a>
-             <a href="#" aria-label="LinkedIn" style="color:inherit;text-decoration:none;">IN</a>
-             <a href="#" aria-label="Facebook" style="color:inherit;text-decoration:none;">FB</a>
-           </div>
-         </div>
-       </div>
-       <p style="text-align:center;margin-top:2rem;font-size:.8rem;">&copy; {new Date().getFullYear()} Innovados</p>
-     </footer>
+    <Footer lang={lang} isEN={isEN} />
   </body>
 </html>
